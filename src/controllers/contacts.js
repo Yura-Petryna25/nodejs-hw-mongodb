@@ -12,16 +12,13 @@ export const getAllContacts = async (req, res, next) => {
       isFavourite,
     } = req.query;
 
-    const filters = {};
-    if (type) filters.contactType = type;
-    if (isFavourite !== undefined) filters.isFavourite = isFavourite === 'true';
-
-    const result = await contactsService.getContacts({
+    const result = await contactsService.getAllContacts({
       page: parseInt(page),
       perPage: parseInt(perPage),
       sortBy,
       sortOrder,
-      filters,
+      type,
+      isFavourite,
     });
 
     res.status(200).json({

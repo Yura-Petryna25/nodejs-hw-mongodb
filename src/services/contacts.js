@@ -7,14 +7,17 @@ export const getAllContacts = async ({
   sortOrder = 'asc',
   type,
   isFavourite,
+  userId,
 }) => {
   const skip = (page - 1) * perPage;
   const sortDirection = sortOrder === 'desc' ? -1 : 1;
 
-  const filter = {};
+  const filter = { userId };
+
   if (type) {
     filter.contactType = type;
   }
+
   if (isFavourite !== undefined) {
     filter.isFavourite = isFavourite === 'true';
   }
@@ -36,11 +39,15 @@ export const getAllContacts = async ({
   };
 };
 
-export const getContactById = (id) => ContactsCollection.findById(id);
+export const getContactById = (id, userId) =>
+  ContactsCollection.findOne({ _id: id, userId });
 
 export const createContact = (data) => ContactsCollection.create(data);
 
-export const updateContact = (id, data) =>
-  ContactsCollection.findByIdAndUpdate(id, data, { new: true });
+export const updateContact = (id, data, userId) =>
+  ContactsCollection.findOneAndUpdate({ _id: id, userId }, data, {
+    new: true,
+  }); // 💡 лише свій контакт
 
-export const deleteContact = (id) => ContactsCollection.findByIdAndDelete(id);
+export const deleteContact = (id, userId) =>
+  ContactsCollection.findOneAndDelete({ _id: id, userId });

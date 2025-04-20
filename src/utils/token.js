@@ -1,10 +1,18 @@
 import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const JWT_ACCESS_SECRET = process.env.JWT_ACCESS_SECRET;
 const JWT_REFRESH_SECRET = process.env.JWT_REFRESH_SECRET;
 
+if (!JWT_ACCESS_SECRET || !JWT_REFRESH_SECRET) {
+  throw new Error('JWT secrets are not defined in .env');
+}
+
 export const generateTokens = (userId) => {
   const payload = { id: userId };
+
   const accessToken = jwt.sign(payload, JWT_ACCESS_SECRET, {
     expiresIn: '15m',
   });

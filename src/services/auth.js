@@ -10,9 +10,19 @@ export const createUser = async (userData) => {
 };
 
 export const createSession = async (userId, tokens) => {
+  const {
+    accessToken,
+    refreshToken,
+    accessTokenValidUntil,
+    refreshTokenValidUntil,
+  } = tokens;
+
   return await Session.create({
     userId,
-    refreshToken: tokens.refreshToken,
+    accessToken,
+    refreshToken,
+    accessTokenValidUntil,
+    refreshTokenValidUntil,
   });
 };
 

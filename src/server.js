@@ -17,8 +17,12 @@ export const setupServer = () => {
   app.use(pino());
   app.use(express.json());
   app.use(cookieParser());
-  app.use('/auth', authRouter);
 
+  app.get('/', (req, res) => {
+    res.send('Server is up and running!');
+  });
+
+  app.use('/auth', authRouter);
   app.use('/contacts', contactsRouter);
 
   app.use(notFoundHandler);

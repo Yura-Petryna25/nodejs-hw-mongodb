@@ -1,5 +1,5 @@
 import createHttpError from 'http-errors';
-import UsersCollection from '../db/models/user.js';
+import UsersCollection from '../db/models/User.js';
 import bcrypt from 'bcrypt';
 import { randomBytes } from 'crypto';
 import {
@@ -8,7 +8,7 @@ import {
   SMTP,
   TEMPLATES_DIR,
 } from '../constans/index.js';
-import SessionsCollection from '../db/models/session.js';
+import SessionsCollection from '../db/models/Session.js';
 import jwt from 'jsonwebtoken';
 import { getEnvVar } from '../utils/getEnvVar.js';
 import { sendEmail } from '../utils/sendMail.js';

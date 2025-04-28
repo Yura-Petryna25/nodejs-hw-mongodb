@@ -10,7 +10,6 @@ const sessionsSchema = new Schema(
   },
   { timestamps: true, versionKey: false },
 );
-//
 
 const SessionsCollection = model('sessions', sessionsSchema);
 

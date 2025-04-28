@@ -1,21 +1,17 @@
-// const errorHandler = (err, req, res, next) => {
-//   console.error('Error:', err.message);
-//   res.status(err.status || 500).json({
-//     status: err.status || 500,
-//     message: err.message,
-//     data: err.message,
-//   });
-// };
+import { HttpError } from 'http-errors';
 
-// export default errorHandler;
+export const errorHandler = (err, req, res, next) => {
+  if (err instanceof HttpError) {
+    res.status(err.status).json({
+      status: err.status,
+      message: err.name,
+      data: err,
+    });
+    return;
+  }
 
-const errorHandler = (err, req, res, next) => {
-  console.error('Error:', err.message);
-  res.status(err.status || 500).json({
-    status: err.status || 500,
-    message: err.message,
-    data: null,
+  res.status(500).json({
+    message: 'Something went wrong',
+    error: err.message,
   });
 };
-
-export default errorHandler;

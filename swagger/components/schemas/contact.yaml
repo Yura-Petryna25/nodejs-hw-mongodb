@@ -1,0 +1,33 @@
+type: object
+required:
+  - name
+  - phoneNumber,
+  - email
+  - isFavourite
+  - contactType
+  - photo
+properties:
+  name:
+    description: "Contact's name"
+    type: string
+    example: 'John Doe'
+  phoneNumber:
+    description: "Contact's phone number"
+    type: string
+    example: '1234567890'
+  email:
+    description: "Contact's email"
+    type: string
+    example: 'd4d4d@example.com'
+  isFavourite:
+    description: 'Whether is contact favourite'
+    type: boolean
+    example: false
+  contactType:
+    description: "Contact's type"
+    type: string
+    example: 'work'
+  photo:
+    description: "Contact's photo file"
+    type: string
+    format: binary

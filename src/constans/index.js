@@ -1,5 +1,5 @@
 import path from 'node:path';
-
+import { fileURLToPath } from 'url';
 export const SORT_ORDER = {
   ASC: 'asc',
   DESC: 'desc',
@@ -24,3 +24,6 @@ export const CLOUDINARY = {
   API_KEY: 'API_KEY',
   API_SECRET: 'API_SECRET',
 };
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+export const SWAGGER_PATH = path.resolve('docs/swagger.json');

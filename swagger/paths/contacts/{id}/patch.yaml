@@ -1,8 +1,8 @@
 tags:
   - Contacts
-summary: Update contact by id
+summary: Update a contact
 operationId: updateContact
-description: 'Update an existing contact by id'
+description: Update an existing contact's details.
 security:
   - bearerAuth: []
 parameters:
@@ -11,38 +11,34 @@ parameters:
     required: true
     schema:
       type: string
-      example: '65ca67e7ae7f10c88b598384'
+    example: '67ca67e7ae7f10c25b566655'
 requestBody:
   required: true
   content:
-    multipart/form-data:
+    application/json:
       schema:
         type: object
         properties:
           name:
             type: string
-            example: 'Updated contact'
-          email:
-            type: string
-            example: 'updated@example.com'
+            example: Ivan Pele
           phoneNumber:
             type: string
-            example: '+1234567890'
-          isFavourite:
-            description: "Contact's favorite status"
-            type: boolean
-            example: true
+            example: +380998877900
+          email:
+            type: string
+            example: ivanpele@gmail.com
           contactType:
-            description: "Contact's type"
             type: string
-            example: 'Personal'
-          photo:
-            description: "New contact's photo file"
-            type: string
-            format: binary
+            example: home
+          isFavourite:
+            type: boolean
+            example: false
+        required: []
+
 responses:
   '200':
-    description: 'Successfully updated contact'
+    description: Contact successfully updated
     content:
       application/json:
         schema:
@@ -57,13 +53,15 @@ responses:
               example: 200
             message:
               type: string
-              example: Successfully updated contact with id 65ca67e7ae7f10c88b598384!
+              example: 'Contact successfully updated!'
             data:
               type: object
-              $ref: '../../../components/schemas/contact.yaml'
+              $ref: ../../../components/schemas/contact.yaml
   '400':
-    $ref: '../../../components/responses/400.yaml'
+    $ref: ../../../components/responses/400.yaml
   '404':
-    $ref: '../../../components/responses/404.yaml'
+    $ref: ../../../components/responses/404.yaml
+  '401':
+    $ref: ../../../components/responses/401.yaml
   '500':
-    $ref: '../../../components/responses/500.yaml'
+    $ref: ../../../components/responses/500.yaml
